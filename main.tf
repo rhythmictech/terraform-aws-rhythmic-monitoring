@@ -99,11 +99,8 @@ resource "aws_sns_topic_policy" "notify" {
 
 data "aws_iam_policy_document" "notify" {
 
-  policy_id = "__default_policy_ID"
-
   statement {
     effect = "Allow"
-    sid    = "__default_statement_ID"
 
     actions = [
       "SNS:AddPermission",

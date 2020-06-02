@@ -37,7 +37,7 @@ variable "notify_webhook" {
 # Jira Integration Vars
 ########################################
 variable "create_jira_secret_access_policy" {
-  default = true
+  default     = true
   description = "If true, will attach an IAM policy granting read access to the secret containing the Jira access token. Only effective if `enable_jira_integration=true`"
 }
 

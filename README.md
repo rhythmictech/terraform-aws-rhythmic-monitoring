@@ -40,17 +40,36 @@ aws --region us-east-1 secretsmanager create-secret --name jira-api-token --secr
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| archive | n/a |
+| aws | n/a |
+| null | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| alert\_webhook | Webhook to send alerts to. Currently muyst be a PagerDuty webhook | string | n/a | yes |
-| enable\_jira\_integration | This is experimental and not fully working yet. | bool | `"false"` | no |
-| name | Moniker to apply to all resources in the module | string | n/a | yes |
-| notify\_webhook | Webhook to send notifications to. Currently must be a Slack webhook | string | n/a | yes |
-| slack\_channel | Slack channel to route alerts to | string | n/a | yes |
-| slack\_username | Slack username to post alerts as \(will use aws account id if not specified\) | string | `""` | no |
-| tags | User-Defined tags | map(string) | `{}` | no |
+|------|-------------|------|---------|:--------:|
+| alert\_webhook | Webhook to send alerts to. Currently muyst be a PagerDuty webhook | `string` | n/a | yes |
+| create\_jira\_secret\_access\_policy | If true, will attach an IAM policy granting read access to the secret containing the Jira access token. Only effective if `enable_jira_integration=true` | `bool` | `true` | no |
+| enable\_jira\_integration | Enable Jira integration Lambda | `bool` | `false` | no |
+| jira\_api\_token\_secret\_name | Name of Secrets Manager secret containing API Token to use for requests (see https://confluence.atlassian.com/cloud/api-tokens-938839638.html) | `string` | `null` | no |
+| jira\_issue\_type | Issue Type (key) to use for all issues | `string` | `null` | no |
+| jira\_project | Jira Project Key to create issues in | `string` | `null` | no |
+| jira\_url | URL of Jira instance | `string` | `null` | no |
+| jira\_username | Jira Username (must match specified API key) | `string` | `null` | no |
+| name | Moniker to apply to all resources in the module | `string` | n/a | yes |
+| notify\_webhook | Webhook to send notifications to. Currently must be a Slack webhook | `string` | n/a | yes |
+| pip\_path | Path to your pip installation (must be valid if `enable_jira_integration=true`) | `string` | `"/usr/local/bin/pip"` | no |
+| slack\_channel | Slack channel to route alerts to | `string` | n/a | yes |
+| slack\_username | Slack username to post alerts as (will use aws account id if not specified) | `string` | `""` | no |
+| tags | User-Defined tags | `map(string)` | `{}` | no |
 
 ## Outputs
 
