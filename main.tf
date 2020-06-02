@@ -87,11 +87,6 @@ resource "aws_sns_topic" "ticket" {
   tags = var.tags
 }
 
-# resource "aws_sns_topic_policy" "ticket" {
-#   arn    = aws_sns_topic.notify.arn
-#   policy = data.aws_iam_policy_document.policy.json
-# }
-
 resource "aws_sns_topic" "notify" {
   name = local.notify_topic_name
   tags = var.tags

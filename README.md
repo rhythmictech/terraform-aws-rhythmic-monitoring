@@ -1,5 +1,7 @@
 # terraform-aws-rhythmic-monitoring [![](https://github.com/rhythmictech/terraform-aws-rhythmic-monitoring/workflows/pre-commit-check/badge.svg)](https://github.com/rhythmictech/terraform-aws-rhythmic-monitoring/actions) <a href="https://twitter.com/intent/follow?screen_name=RhythmicTech"><img src="https://img.shields.io/twitter/follow/RhythmicTech?style=social&logo=RhythmicTech" alt="follow on Twitter"></a>
 
+_This is an experimental module_
+
 Configures a basic monitoring pattern based on three thresholds:
 
 * *Alerting* - send to something like PagerDuty
@@ -8,16 +10,34 @@ Configures a basic monitoring pattern based on three thresholds:
 
 Currently this module only supports these targets, though we aim to make it more flexible over time to support different integrations.
 
+You can attach currently CloudWatch Alarms and Metric Alarms.
+
 ## Example
 Here's what using the module will look like
 ```
-module "example" {
-  source = "rhythmictech/terraform-mycloud-mymodule
+module "monitoring" {
+  source = "rhythmictech/terraform-aws-rhythmic-monitoring"
+
+  alert_webhook              = var.pagerduty_webhook
+  enable_jira_integration    = true
+  name                       = "Monitoring"
+  notify_webhook             = var.slack_webhook
+  jira_api_token_secret_name = "jira-api-token"
+  jira_issue_type            = "Incident"
+  jira_project               = "JSD"
+  jira_url                   = "https://customer.atlassian.net/"
+  jira_username              = "jira_user"
+  slack_channel              = var.slack_channel
+  slack_username             = var.slack_username
 }
 ```
 
-## About
-A bit about this module
+## Jira integration
+To use Jira integration, you need to save your API key in AWS Secrets Manager. Something like this would work:
+
+```
+aws --region us-east-1 secretsmanager create-secret --name jira-api-token --secret-string="JIRA_API_TOKEN" --tags '[{"Key":"terraform_managed","Value":"false"}'
+```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
