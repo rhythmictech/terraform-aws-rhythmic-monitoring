@@ -10,7 +10,8 @@ logger = logging.getLogger()
 logger.setLevel(os.environ.get('LOG_LEVEL', logging.DEBUG))
 
 for handler in logger.handlers:
-    handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s](%(name)s) %(message)s'))
+    handler.setFormatter(logging.Formatter(
+        '%(asctime)s [%(levelname)s](%(name)s) %(message)s'))
 
 for lib_logger in ['botocore', 'boto3', 'jira', 'requests_oauthlib', 'oauthlib', 'urllib3']:
     logging.getLogger(lib_logger).setLevel(
@@ -35,13 +36,14 @@ JIRA_API_TOKEN = secret['SecretString']
 options = {"server": JIRA_URL}
 
 jira = JIRA(
-  basic_auth=(JIRA_USERNAME, JIRA_API_TOKEN), 
-  options={
-    'server': JIRA_URL
-  }
+    basic_auth=(JIRA_USERNAME, JIRA_API_TOKEN),
+    options={
+        'server': JIRA_URL
+    }
 )
 
 logger.info("Connected to Jira: {}".format(jira.server_info()))
+
 
 def lambda_handler(event, context):
 
@@ -58,6 +60,4 @@ def lambda_handler(event, context):
     jira.add_comment(
         issue.key, 'Alert triggered by {} AWS CloudWatch integration'.format(INTEGRATION_NAME))
 
-
     return respond(200, "OK")
-
