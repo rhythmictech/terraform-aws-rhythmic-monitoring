@@ -1,7 +1,4 @@
 requests
-pprint
-six
 regex
-ipython
 jira
 boto3
