@@ -61,9 +61,3 @@ aws --region us-east-1 secretsmanager create-secret --name jira-api-token --secr
 | sns\_topic\_ticket\_arn | Ticketing Topic ARN |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
-## The Giants underneath this module
-- pre-commit.com/
-- terraform.io/
-- github.com/tfutils/tfenv
-- github.com/segmentio/terraform-docs
