@@ -85,7 +85,7 @@ data "aws_iam_policy_document" "secret_access" {
 }
 
 resource "aws_iam_role_policy" "secret_access" {
-  count  = var.create_jira_secret_access_policy ? 1 : 0
+  count  = var.enable_jira_integration && var.create_jira_secret_access_policy ? 1 : 0
   role   = aws_iam_role.jira[0].name
   policy = data.aws_iam_policy_document.secret_access[0].json
 }
