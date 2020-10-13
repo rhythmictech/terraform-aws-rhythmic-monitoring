@@ -42,14 +42,17 @@ aws --region us-east-1 secretsmanager create-secret --name jira-api-token --secr
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| terraform | >= 0.13.0 |
+| aws | >= 3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | archive | n/a |
-| aws | n/a |
+| aws | >= 3.0 |
 | null | n/a |
 
 ## Inputs

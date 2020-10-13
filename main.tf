@@ -9,8 +9,9 @@ locals {
 }
 
 resource "aws_sns_topic" "alert" {
-  name = local.alert_topic_name
-  tags = var.tags
+  name              = local.alert_topic_name
+  kms_master_key_id = aws_kms_alias.monitoring.arn
+  tags              = var.tags
 }
 
 resource "aws_sns_topic_subscription" "alert" {
@@ -83,13 +84,15 @@ data "aws_iam_policy_document" "alert" {
 }
 
 resource "aws_sns_topic" "ticket" {
-  name = local.ticket_topic_name
-  tags = var.tags
+  name              = local.ticket_topic_name
+  kms_master_key_id = aws_kms_alias.monitoring.arn
+  tags              = var.tags
 }
 
 resource "aws_sns_topic" "notify" {
-  name = local.notify_topic_name
-  tags = var.tags
+  name              = local.notify_topic_name
+  kms_master_key_id = aws_kms_alias.monitoring.arn
+  tags              = var.tags
 }
 
 resource "aws_sns_topic_policy" "notify" {

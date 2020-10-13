@@ -10,7 +10,9 @@ data "aws_arn" "notify" {
 }
 
 module "notify-slack" {
-  source            = "terraform-aws-modules/notify-slack/aws"
+  source  = "terraform-aws-modules/notify-slack/aws"
+  version = "~> 4.3"
+
   create_sns_topic  = false
   sns_topic_name    = data.aws_arn.notify.resource
   slack_webhook_url = var.notify_webhook

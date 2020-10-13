@@ -10,5 +10,6 @@
 
 *.zip
 build/*
+tmp/*
 
 .DS_Store
