@@ -45,21 +45,26 @@ aws --region us-east-1 secretsmanager create-secret --name jira-api-token --secr
 | Name | Version |
 |------|---------|
 | terraform | >= 0.13.0 |
+| archive | 1.3.0 |
 | aws | >= 3.0 |
+| null | 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| archive | n/a |
+| archive | 1.3.0 |
 | aws | >= 3.0 |
-| null | n/a |
+| null | 3.0.0 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | alert\_webhook | Webhook to send alerts to. Currently muyst be a PagerDuty webhook | `string` | n/a | yes |
+| name | Moniker to apply to all resources in the module | `string` | n/a | yes |
+| notify\_webhook | Webhook to send notifications to. Currently must be a Slack webhook | `string` | n/a | yes |
+| slack\_channel | Slack channel to route alerts to | `string` | n/a | yes |
 | create\_jira\_secret\_access\_policy | If true, will attach an IAM policy granting read access to the secret containing the Jira access token. Only effective if `enable_jira_integration=true` | `bool` | `true` | no |
 | enable\_jira\_integration | Enable Jira integration Lambda | `bool` | `false` | no |
 | jira\_api\_token\_secret\_name | Name of Secrets Manager secret containing API Token to use for requests (see https://confluence.atlassian.com/cloud/api-tokens-938839638.html) | `string` | `null` | no |
@@ -67,10 +72,7 @@ aws --region us-east-1 secretsmanager create-secret --name jira-api-token --secr
 | jira\_project | Jira Project Key to create issues in | `string` | `null` | no |
 | jira\_url | URL of Jira instance | `string` | `null` | no |
 | jira\_username | Jira Username (must match specified API key) | `string` | `null` | no |
-| name | Moniker to apply to all resources in the module | `string` | n/a | yes |
-| notify\_webhook | Webhook to send notifications to. Currently must be a Slack webhook | `string` | n/a | yes |
 | pip\_path | Path to your pip installation (must be valid if `enable_jira_integration=true`) | `string` | `"/usr/local/bin/pip"` | no |
-| slack\_channel | Slack channel to route alerts to | `string` | n/a | yes |
 | slack\_username | Slack username to post alerts as (will use aws account id if not specified) | `string` | `""` | no |
 | tags | User-Defined tags | `map(string)` | `{}` | no |
 

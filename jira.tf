@@ -1,6 +1,6 @@
 locals {
   # even though this is set generously, it's not used.
-  jira_api_token = try(data.aws_secretsmanager_secret.jira[0].arn, "*")
+  jira_api_token = try(data.aws_secretsmanager_secret.jira[0].arn, "*") #tfsec:ignore:GEN002
   jira_name      = "${var.name}-create-jira"
 }
 

@@ -9,7 +9,7 @@ data "aws_arn" "notify" {
   arn = aws_sns_topic.notify.arn
 }
 
-module "notify-slack" {
+module "notify_slack" {
   source  = "terraform-aws-modules/notify-slack/aws"
   version = "~> 4.3"
 
