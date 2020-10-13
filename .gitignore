@@ -7,9 +7,3 @@
 
 # .tfvars files
 *.tfvars
-
-*.zip
-build/*
-tmp/*
-
-.DS_Store
