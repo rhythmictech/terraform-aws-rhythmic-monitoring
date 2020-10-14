@@ -21,7 +21,7 @@ You can attach currently CloudWatch Alarms and Metric Alarms.
 
 ## Example
 Here's what using the module will look like
-```
+```tf
 module "monitoring" {
   source = "rhythmictech/terraform-aws-rhythmic-monitoring"
 
@@ -42,8 +42,12 @@ module "monitoring" {
 ## Jira integration
 To use Jira integration, you need to save your API key in AWS Secrets Manager. Something like this would work:
 
-```
-aws --region us-east-1 secretsmanager create-secret --name jira-api-token --secret-string="JIRA_API_TOKEN" --tags '[{"Key":"terraform_managed","Value":"false"}'
+```sh
+aws secretsmanager create-secret \
+  --region us-east-1 \
+  --name jira-api-token \
+  --secret-string="JIRA_API_TOKEN" \
+  --tags '[{"Key":"terraform_managed","Value":"false"}]'
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
