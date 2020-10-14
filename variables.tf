@@ -24,7 +24,7 @@ variable "tags" {
 ########################################
 
 variable "alert_webhook" {
-  description = "Webhook to send alerts to. Currently muyst be a PagerDuty webhook"
+  description = "Webhook to send alerts to. Currently must be a PagerDuty webhook"
   type        = string
 }
 

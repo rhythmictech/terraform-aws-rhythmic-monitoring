@@ -68,7 +68,7 @@ aws --region us-east-1 secretsmanager create-secret --name jira-api-token --secr
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| alert\_webhook | Webhook to send alerts to. Currently muyst be a PagerDuty webhook | `string` | n/a | yes |
+| alert\_webhook | Webhook to send alerts to. Currently must be a PagerDuty webhook | `string` | n/a | yes |
 | name | Moniker to apply to all resources in the module | `string` | n/a | yes |
 | notify\_webhook | Webhook to send notifications to. Currently must be a Slack webhook | `string` | n/a | yes |
 | slack\_channel | Slack channel to route alerts to | `string` | n/a | yes |
