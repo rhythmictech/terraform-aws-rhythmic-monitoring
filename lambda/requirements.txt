@@ -1,0 +1,4 @@
+requests
+regex
+jira
+boto3
