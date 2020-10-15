@@ -1,5 +1,4 @@
 locals {
-  # even though this is set generously, it's not used.
   jira_api_token = try(data.aws_secretsmanager_secret.jira[0].arn, "*") #tfsec:ignore:GEN002
   jira_name      = "${var.name}-create-jira"
 }
@@ -89,8 +88,6 @@ resource "aws_iam_role_policy" "secret_access" {
   role   = aws_iam_role.jira[0].name
   policy = data.aws_iam_policy_document.secret_access[0].json
 }
-
-
 
 resource "aws_lambda_function" "jira" {
   count            = var.enable_jira_integration ? 1 : 0
