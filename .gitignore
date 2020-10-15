@@ -11,3 +11,4 @@
 .env
 build
 *.zip
+__pycache__
