@@ -33,7 +33,7 @@ module "monitoring" {
   jira_issue_type            = "Incident"
   jira_project               = "JSD"
   jira_url                   = "https://customer.atlassian.net/"
-  jira_username              = "jira_user"
+  jira_username              = "jira_user@customer.com"
   slack_channel              = var.slack_channel
   slack_username             = var.slack_username
 }
@@ -49,6 +49,26 @@ aws secretsmanager create-secret \
   --secret-string="JIRA_API_TOKEN" \
   --tags '[{"Key":"terraform_managed","Value":"false"}]'
 ```
+
+You can read more about how to generate them on the [Atlassian Docs](https://confluence.atlassian.com/cloud/api-tokens-938839638.html). If yopu are unsure of what issue types or projects you have available [this blog post](https://blog.developer.atlassian.com/creating-a-jira-cloud-issue-in-a-single-rest-call/) has some useful `curl` calls.
+
+## Slack Integration
+To create an incoming Slack webhook you can [read these docs](https://api.slack.com/messaging/webhooks) and will end up with a webhook like this:
+
+```
+https://hooks.slack.com/services/T1GG3R/K1NG3YR4BW/2hWASoxAt8lHOAXizwdvsa
+```
+
+## Pagerduty Integration
+
+This module uses Pagerduty's AWS Cloudwatch integration, which you can read about [on the pagerduty docs](https://support.pagerduty.com/docs/aws-cloudwatch-integration-guide).
+Another helpful example is [this blog post](https://www.giladpeleg.com/blog/aws-sns-topic-subscription-with-pagerduty-terraform/)
+You will end up with a webhook like the one below:
+
+```
+https://events.pagerduty.com/integration/10101RhythmicTechDaBest200hassh/enqueue
+```
+
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
