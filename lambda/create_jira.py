@@ -40,13 +40,18 @@ print("Connected to Jira: {}".format(jira.server_info()))
 
 
 def lambda_handler(event, context):
+    """ receives events from SNS, see https://docs.aws.amazon.com/lambda/latest/dg/with-sns.html """
 
     print("Event received: {}".format(event))
 
+    subject = event['Records'][0]['Sns']['Subject']
+    message = event['Records'][0]['Sns']['Message']
+    region = event['Records'][0]['Sns']['TopicArn'].split(":")[3]
+
     issue_fields = {
         'project': JIRA_PROJECT,
-        'summary': 'Alert - {}'.format(event['id']),
-        'description': str(event),
+        'summary': 'Alert - {}'.format(subject),
+        'description': message,
         'issuetype': {'name': ISSUE_TYPE}}
 
     issue = jira.create_issue(fields=issue_fields)
