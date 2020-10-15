@@ -39,23 +39,36 @@ jira = JIRA(
 print("Connected to Jira: {}".format(jira.server_info()))
 
 
+def parse_message(message):
+
+    if type(message) is str:
+        try:
+          message = json.loads(message)
+        except json.JSONDecodeError as err:
+          logger.error(f'JSON decode error: {err}')
+
+    return message
+
+
 def lambda_handler(event, context):
     """ receives events from SNS, see https://docs.aws.amazon.com/lambda/latest/dg/with-sns.html """
 
     print("Event received: {}".format(event))
 
     subject = event['Records'][0]['Sns']['Subject']
-    message = event['Records'][0]['Sns']['Message']
+    message = parse_message(event['Records'][0]['Sns']['Message'])
     region = event['Records'][0]['Sns']['TopicArn'].split(":")[3]
+
+    description = "\n".join([ f'{k}: {v}' for k, v in message.items()])
 
     issue_fields = {
         'project': JIRA_PROJECT,
         'summary': 'Alert - {}'.format(subject),
-        'description': message,
+        'description': description,
         'issuetype': {'name': ISSUE_TYPE}}
 
     issue = jira.create_issue(fields=issue_fields)
     jira.add_comment(
-        issue.key, 'Alert triggered by {} AWS CloudWatch integration'.format(INTEGRATION_NAME))
+        issue.key, 'Alert triggered by {} aws cloudwatch integration'.format(INTEGRATION_NAME))
 
     return (200, "OK")
