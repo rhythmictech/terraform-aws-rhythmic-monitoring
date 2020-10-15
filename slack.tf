@@ -13,10 +13,11 @@ module "notify_slack" {
   source  = "terraform-aws-modules/notify-slack/aws"
   version = "~> 4.3"
 
-  create_sns_topic  = false
-  sns_topic_name    = data.aws_arn.notify.resource
-  slack_webhook_url = var.notify_webhook
-  slack_channel     = var.slack_channel
-  slack_username    = local.slack_username
-  tags              = var.tags
+  create_sns_topic     = false
+  lambda_function_name = "${var.name}-notify-slack"
+  sns_topic_name       = data.aws_arn.notify.resource
+  slack_webhook_url    = var.notify_webhook
+  slack_channel        = var.slack_channel
+  slack_username       = local.slack_username
+  tags                 = var.tags
 }
