@@ -11,7 +11,7 @@ data "aws_arn" "notify" {
 
 module "notify_slack" {
   source  = "terraform-aws-modules/notify-slack/aws"
-  version = "~> 4.3"
+  version = "~> 7.1.1"
 
   create_sns_topic     = false
   lambda_function_name = "${var.name}-notify-slack"
